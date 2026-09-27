@@ -1,0 +1,2 @@
+# ABSENSI-SUBUH-LN-LPK-LKP-LP2SSC
+Buat absensi subuh
