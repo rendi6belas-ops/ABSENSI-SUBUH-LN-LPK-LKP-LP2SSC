@@ -52,11 +52,11 @@ const db = firebase.database();
 const BATCH_STUDENTS = {
   "1": ["PARAMITA","NAWIYAH","SINDI NURAENI"].sort((a,b) => a.localeCompare(b,"id")),
   "2": ["NURJANAH","RANTI","RISNAWATI"].sort((a,b) => a.localeCompare(b,"id")),
-  "3": ["KOMALASARI","NAJLA MAULIDA","DEDE RIFQI SOLEHUDIN","TATA PUSPITA SARI","NENENG SITI SOPIAH","PUTRI HANDAYANI","RAHMAWATI","SEFTI SUKMA SARI","SELPI FUJIANTI","RIAN LESMANA"].sort((a,b) => a.localeCompare(b,"id")),
+  "3": ["KOMALASARI","NAJLA MAULIDA","DEDE RIFQI SOLEHUDIN","IRVAN NUR EVENDI","TATA PUSPITA SARI","NENENG SITI SOPIAH","PUTRI HANDAYANI","RAHMAWATI","SEFTI SUKMA SARI","SELPI FUJIANTI","RIAN LESMANA"].sort((a,b) => a.localeCompare(b,"id")),
   "4": ["CINDY AULIA PUTRI","NENG AISYAH NURUL KAROMAH","YASPA ZAELANI","M.RULI","ILHAM MAULANA"].sort((a,b) => a.localeCompare(b,"id")),
   "5": ["MAULANA MALIK SAPUTRA","IMPITA SARI","SANGGA NUR CAHYA","RIO RIVALDO","SELVI SALAVIAH"].sort((a,b) => a.localeCompare(b,"id")),
   "6": ["ABDUL JALIL","ABDUL MUHYI","AKMAL ALGHIFARI","DELON SYAIFUL BAHRI","HENDRIS ADAMSYAH","IKHSAN KAMIL","IRPAN","MUHAMMAD FAUZI","MUHAMMAD IRFAN MUNTAHA","NANANG HASMID PUTRA","NANDANG FAUZI","OJI SAPUTRA","SAHID HAKIM","UJANG","WIJOYO","WILKI KOMARA","YUSRI","YUSUF ABDULLATIF"].sort((a,b) => a.localeCompare(b,"id")),
-  "MM": ["AHMAD MUPARIZ","ALYA SAIPATUL MUGHISAH","AMELIA PUTRI RAMADANI","AMIR","ARDELA PRAMUDITA","ARIL FIRMANSYAH","DELVIA MISKA UTAMI","DENDI","DEWI MULIANI BESAN","EDO MAULANA","ELAH FATMAWATI","ERNA NURBAETI","FAHRUL HIDAYAT","FAISAL RAMDANI","FARHAT ASIATUL ISLAM","FARIZ HAMAMI","FARSHA INDRA AJI SATRIA","FIRMAN LAPANDEWA","GALANG AMRIN TIHUN","HERI NURFALAH","IFAN PANDIANSYAH","IKHWAN","JEAN PAUL SULTAN","LESTARI","LIZA SEPTIANI","M. ABDUL ROHMAN FAUZIE","M. ALIYUDIN SAPUTRA","M. GIBRAN SAUQI","M. ILHAM ROTAMA","M RAMDANI","M SHOLEH HASAN","MARDIAH SALSABILIA","MARSANDA","MOH. FARHAN NAZMI AKBAR","MUHAMAD MANSUR","MUHAMMAD DELVAN FABIANABEL","MUHAMMAD JODI IRAWAN","MUHAMMAD REHAN AWAL PRATAMA","MUHAMMAD RIYADI PANGKA","MULYOSO","NANDI SUPRIADI","NURHAYATI","QOTRUN NADA","RAFLI RIFADILAH HUSNI","RAIHAN NUR WAHID","REFAL PAHLEVI","REZA ADHITYA NUGROHO","RIDWAN MAULANA","RIPAL MAULANA","RISMA","RIZWAN MUBAROK","ROSMIATI","ROSNANI","SAGITA PRAMUDITA","SAHARA PUSPITASARI","SAKA","SARDIVA","SASI NOVITA SARI","SATRIA BIMANTARA","SITI MASLIHAH","SITI RAHMAWATI","SITI SARIPAH","SUCI MIFTAHUL JANNAH","SUDAR DAWAN","SULAEMAN","SURYADIN","TSALSA FAUZIAH","UPI MUTIA TAUFIK","WIDI PERMONO","WILDO HERIYANTO DAWAN","YOGI SUGIH MUKTI"],
+  "MM": ["AHMAD MUPARIZ","ALYA SAIPATUL MUGHISAH","AMELIA PUTRI RAMADANI","AMIR","ARDELA PRAMUDITA","ARIL FIRMANSYAH","DELVIA MISKA UTAMI","DENDI","DEWI MULIANI BESAN","EDO MAULANA","ELAH FATMAWATI","ERNA NURBAETI","ERIK RODIBILAH","FAHRUL HIDAYAT","FAISAL RAMDANI","FARHAT ASIATUL ISLAM","FARIZ HAMAMI","FARSHA INDRA AJI SATRIA","FIRMAN LAPANDEWA","GALANG AMRIN TIHUN","HERI NURFALAH","IFAN PANDIANSYAH","IKHWAN","JEAN PAUL SUTAN","LESTARI","LIZA SEPTIANI","M. ABDUL ROHMAN FAUZIE","M. ALIYUDIN SAPUTRA","M. GIBRAN SAUQI","M. ILHAM ROTAMA","M SHOLEH HASAN","MARDIAH SALSABILIA","MARSANDA","MOH. FARHAN NAZMI AKBAR","MUHAMMAD IBNU KHOLIK","MUHAMAD MANSUR","MUHAMAD RAMDANI","MUHAMMAD DELVAN FABIANABEL","MUHAMMAD JODI IRAWAN","MUHAMMAD REHAN AWAL PRATAMA","MUHAMMAD RIYADI PANGKA","MULYOSO","NANDI SUPRIADI","NURHAYATI","QOTRUN NADA","RAFLI RIFADILAH HUSNI","RAIHAN NUR WAHID","REFAL PAHLEVI","REZA ADHITYA NUGROHO","RIDWAN MAULANA","RIPAL MAULANA","RISMA","RIZWAN MUBAROK","ROSMIATI","ROSNANI","SAGITA PRAMUDITA","SAHARA PUSPITASARI","SAKA","SARDIVA","SASI NOVITA SARI","SATRIA BIMANTARA","SITI MASLIHAH","SITI RAHMAWATI","SITI SARIPAH","SUCI MIFTAHUL JANNAH","SUDAR DAWAN","SULAEMAN","SURYADIN","TSALSA FAUZIAH","UPI MUTIA TAUFIK","WIDI PERMONO","WILDO HERIYANTO DAWAN","YOGI SUGIH MUKTI"],
   "MS": ["AGUS SALIM","RENDI SETIAWAN","M FAIZ AFANDI","RAFI WIDYA DHANA","ADELLIANO SETIAWAN","SAPARUDIN","DEDE SUHENDAR"].sort((a,b) => a.localeCompare(b,"id")),
   "TR": ["SASI NOVITA","SINTA ABIANTI","SITI ALMALIA","SUMARDANI","ABDULLAH","ABIDIN","ADITHIA PERMANA","AGUNG","AHMAD ALI MUDIN","ALAN MAULANA","ALFAIDA DAWAN","ALFIN NURLATUN","ALMAS RAMADHANI","ANISA TIHUN","APRILIANSYAH","ARIVA MUHAMMAD MUNAWAR","ASEP SUBHAN","AYU MUTIARA REGITA CAHYANI","AYU RAHMAWATI","CINTA DEWI SARTIKA","DANDI IRAWAN","DEDE GUNAWAN","DEDE NOVI NADIAH","DENDI SYAFRULLOH","DEPILA","DIAN MENTARI SUCI RAMADINI","DINA","ENDANG SUHENDI","ENDAY","ETTA AISYA MUKADAR","EVI SRI RAHAYU","FACHY FIRMANSYAH","FAKHIRA RAYNA TSANI","FARHAN FIRMANSYAH","FAUZIMAN","FIRMANSYAH (GARUT)","FIRMANSYAH (BOGOR)","FUTRI","HALIMATUSA'DIAH","HILMAN","IBRAHIM MOPIK","IKRAM SURIAH","INDA ANGGUN SARI","INDRI SEFTIYANI","INTAN PERMATA SARI","IRMA","ISWANDI","JULIANTINI PUTRI","KAMIL DAWAN","KHAIRY FAHMI","KHUSNUL KHOTIMAH","LUSI RIJKIYANTI","M RESTU ALFIAT","M SAHRUL MUTAQIN","MAHFUDZ","MAIMUNAH RAHAYAAN","MAULIDA UMI ZAKIAH F.","MUH. JEFRI","MUH. RAFLI KADIR","MUHAMAD ANWAR","MUHAMAD AZZAM NUR RAMADLAN","MUHAMAD BAMBANG","MUHAMAD FAUZI","MUHAMAD NAJRIL ILHAM","MUHAMAD SARDI","MUHAMMAD ALIFATULLAH HIPPY","MUHAMMAD LUKMAN FAJRI","MUHAMMAD NAYIB FAIRUZ","MUHAMMAD RIZQI","MUTIARA FITROTUL NAZIAH","NABILA ELSIVA","NADIATUL KHOIRIYAH","NARIZA RAZAN FATHIN MUSYARY","NAZRIL ILHAM ADITTYA","NENG SRI MARYANI","NETHA AULIA PUTRI BERMAWAN","NOVILATUL KUDSIAH","NUR HAYAT","NURAULIA FEBRIYANTI","NURIA MEILANI","NYALILING TIHUN","OMOY","PAHMI IDRIS","PRITI RAMADANI","RAHMADIA PUTRI","RAHMAT (A17)","RAHMAT (A18)","RAKHA SEFFA AZZIQRI","RANDI MAULANA","REVO MAHDAFIQIH AL-MALIQYO","RIDWAN","RIFKI PADLUR ROHMAN","RIMA ANDINI","ROUDHOTUL JANNAH","SANDRI NURBASAR","SANI SADISAH","SARFAN TIHUN","SAUFANA IS'AFBILLAH","SELILAWATI","SILVA MEDIKA","SILVIA LESTARI","SINTA","SINTIA MAHARANI","SITA AZZAHRA","SITI LUTFIYAH","SITI MULYATI","SITI NUR ALIFAH MUTMAINAH","SITI NURLAELATUL FADILAH","SITI NURPAUJIAH","SITI RAHMAH","SITI RATNA WULAN","SITI SARAH","SUCI AULIA ULFAIZAH","SUKMA ASTARI ELANG","SYIFA LAILATUL HASANAH","SYILVA SAKINATUL ULYA","TASYA SRI RAHMAWATI","UMAR BESAN","WAWAN RIADI DAWAN","WINDI MAELANI","YANRA ARDIANSYAH","ZIDAN MAULANA AZIN","AHMAD DEDY SAPUTRA","ANGGA","DHIATUR RAMADHANI","FHELIA ANUGRAH RIAGINA","GALANG HARY SATRIA","HARRY SETIAWAN","MUHAMMAD FATHUR RAHMAN","MUHMMAD DENI SAFUTRA","RIKWAN HERGAWAN","SITI NURKHOTIMAH"].sort((a,b) => a.localeCompare(b,"id"))
 };
@@ -85,7 +85,7 @@ function sectionOfBatch(b) {
 
 const STATUS = {
   HADIR: { bg:"#dcfce7", border:"#22c55e", text:"#14532d", solid:"#22c55e", icon:"✅" },
-  SAKIT: { bg:"#fef9c3", border:"#eab308", text:"#713f12", solid:"#eab308", icon:"🆘" },
+  SAKIT: { bg:"#f3e8ff", border:"#a855f7", text:"#581c87", solid:"#a855f7", icon:"🆘" },
   IZIN:  { bg:"#dbeafe", border:"#3b82f6", text:"#1e3a8a", solid:"#3b82f6", icon:"ℹ️" },
   ALFA:  { bg:"#fee2e2", border:"#ef4444", text:"#7f1d1d", solid:"#ef4444", icon:"❌" }
 };
@@ -246,7 +246,7 @@ function eachDateStr(startStr, endStr) {
 function dotColor(st) {
   if (st === "HADIR") return "#22c55e";
   if (st === "IZIN") return "#3b82f6";
-  if (st === "SAKIT") return "#eab308";
+  if (st === "SAKIT") return "#a855f7";
   if (st === "ALFA") return "#ef4444";
   return "#e5e7eb";
 }
@@ -277,14 +277,6 @@ function normalizeStatus(st) {
   return null;
 }
 
-// Pisahkan label program dari flag emoji di akhir (mis. "Mekah-Madinah🇸🇦")
-function splitLabelFlag(label) {
-  const m = String(label).match(/^(.*?)([\u{1F1E6}-\u{1F1FF}]{2})$/u);
-  if (m) return [m[1].trim(), m[2]];
-  return [label, ""];
-}
-
-// Emoji untuk alasan izin
 function izinEmoji(reason) {
   const r = String(reason || "").trim();
   if (r === "Haid") return "ℹ️⭕";
@@ -312,8 +304,8 @@ function Toast({ msg, visible }) {
 
 /* ===================== ABSENSI APP ===================== */
 function AbsensiApp() {
-  const [batch, setBatch] = useState("6");
-  const [students, setStudents] = useState(() => loadStudentsLocal("6"));
+  const [batch, setBatch] = useState("1");
+  const [students, setStudents] = useState(() => loadStudentsLocal("1"));
   const [date, setDate] = useState(() => new Date());
   const [attendance, setAttendance] = useState({});
   const [izinReasons, setIzinReasons] = useState({});
@@ -329,7 +321,7 @@ function AbsensiApp() {
   const [dashYear, setDashYear] = useState(() => new Date().getFullYear());
   const [dashWholeMonth, setDashWholeMonth] = useState(true);
   const [dashWeeks, setDashWeeks] = useState([1,2,3,4]);
-  const [dashBatch, setDashBatch] = useState("6");
+  const [dashBatch, setDashBatch] = useState("1");
   const [appMode, setAppMode] = useState("siswa");
   const [autoOpenMin, setAutoOpenMin] = useState(DEFAULT_AUTO_OPEN_MIN);
   const [autoResetMin, setAutoResetMin] = useState(DEFAULT_AUTO_RESET_MIN);
@@ -343,7 +335,6 @@ function AbsensiApp() {
   const [statusConfirm, setStatusConfirm] = useState(null);
   const adminPwdRef = useRef(null);
   const isAdmin = appMode === "admin";
-  const [dateMode, setDateMode] = useState("edit");
   const [toastMsg, setToastMsg] = useState("");
   const [toastVisible, setToastVisible] = useState(false);
   const [newName, setNewName] = useState("");
@@ -366,6 +357,23 @@ function AbsensiApp() {
   const autoResetRunning = useRef(false);
   const lastWibDateRef = useRef(null);
 
+  /* ===== STATE BARU: default confirm + search ===== */
+  const [defaultConfirm, setDefaultConfirm] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allStudentsCache, setAllStudentsCache] = useState(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [pendingScrollTo, setPendingScrollTo] = useState(null);
+  const [editStudent, setEditStudent] = useState(null);
+  const [renameTarget, setRenameTarget] = useState(null);
+const [renameValue, setRenameValue] = useState("");
+const [renameSaving, setRenameSaving] = useState(false);
+const [reminderActive, setReminderActive] = useState(false);
+const [flashOn, setFlashOn] = useState(false);
+const [editRows, setEditRows] = useState([]);
+const [editSaving, setEditSaving] = useState(false);
+  const searchInputRef = useRef(null);
+
   const toast = (msg) => {
     setToastMsg(msg);
     setToastVisible(true);
@@ -382,7 +390,6 @@ function AbsensiApp() {
     if (appMode === "siswa") {
       const t = new Date();
       setDate(t);
-      setDateMode("edit");
       setShowManage(false);
     }
   }, [appMode]);
@@ -447,7 +454,7 @@ function AbsensiApp() {
     };
   }, []);
 
-  // Pergantian hari (00:00 WIB) — HANYA update tanggal, tidak reset absensi
+  // Pergantian hari (00:00 WIB)
   useEffect(() => {
     if (lastWibDateRef.current === null) {
       lastWibDateRef.current = getWibParts().dateStr;
@@ -463,6 +470,43 @@ function AbsensiApp() {
     const id = setInterval(checkNewDay, 30000);
     return () => clearInterval(id);
   }, []);
+
+// Cegah keluar saat masih ada perubahan belum tersimpan
+useEffect(() => {
+  const handler = (e) => {
+    const pending = (saveStatus === "saving") || syncing;
+    if (pending) {
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    }
+  };
+  window.addEventListener("beforeunload", handler);
+  return () => window.removeEventListener("beforeunload", handler);
+}, [saveStatus, syncing]);
+
+// Reminder 10 menit sebelum jam tutup
+useEffect(() => {
+  if (!autoResetEnabled) { setReminderActive(false); return; }
+  const check = () => {
+    const wib = getWibParts();
+    const now = wib.hour * 60 + wib.minute;
+    let diff = autoResetMin - now;
+    if (diff < -720) diff += 1440;
+    if (diff > 720) diff -= 1440;
+    setReminderActive(diff > 0 && diff <= 10);
+  };
+  check();
+  const id = setInterval(check, 30000);
+  return () => clearInterval(id);
+}, [autoResetEnabled, autoResetMin]);
+
+// Kedip-kedip background saat reminder aktif
+useEffect(() => {
+  if (!reminderActive) { setFlashOn(false); return; }
+  const id = setInterval(() => setFlashOn(v => !v), 900);
+  return () => clearInterval(id);
+}, [reminderActive]);
 
   // Jam tutup: yang belum absen → ALFA
   useEffect(() => {
@@ -691,7 +735,7 @@ function AbsensiApp() {
       setHistoryMap(next);
     });
     return () => { cancelled = true; };
-  }, [batch, dateStr, students, studentsLoadedFor.current]);
+  }, [batch, dateStr, students]);
 
   useEffect(() => {
     if (loadingFb) return;
@@ -733,6 +777,48 @@ function AbsensiApp() {
       toast("⚠️ Gagal simpan ke Firebase");
     });
   }, [attendance, izinReasons, dateStr, students, loadingFb, batch]);
+
+  /* ===== SEARCH: hasil filter + auto-scroll ===== */
+  const searchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q || !allStudentsCache) return [];
+    const out = [];
+    BATCH_LIST.forEach(b => {
+      (allStudentsCache[b] || []).forEach(name => {
+        if (name.toLowerCase().includes(q)) {
+          out.push({ name, batch: b, label: (BATCH_THEME[b] && BATCH_THEME[b].label) || b });
+        }
+      });
+    });
+    return out.slice(0, 80);
+  }, [searchQuery, allStudentsCache]);
+
+  useEffect(() => {
+    if (!pendingScrollTo) return;
+    if (loadingFb) return;
+    if (studentsLoadedFor.current !== batch) return;
+    const name = pendingScrollTo;
+    if (!students.includes(name)) {
+      toast("⚠️ Nama tidak ditemukan di " + batchLabel);
+      setPendingScrollTo(null);
+      return;
+    }
+    const t = setTimeout(() => {
+      const el = document.querySelector(`[data-student-name="${CSS.escape(name)}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.style.transition = "outline .3s, box-shadow .3s";
+        el.style.outline = "3px solid #000000";
+el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
+        setTimeout(() => {
+          el.style.outline = "";
+          el.style.boxShadow = "0 8px 30px rgba(0,0,0,.04)";
+        }, 2600);
+      }
+      setPendingScrollTo(null);
+    }, 350);
+    return () => clearTimeout(t);
+  }, [pendingScrollTo, loadingFb, batch, students]);
 
   const counts = useMemo(() => {
     const c = { HADIR:0, SAKIT:0, IZIN:0, ALFA:0 };
@@ -796,10 +882,6 @@ function AbsensiApp() {
         return;
       }
     }
-    if (!isAdmin && dateMode === "view") {
-      toast("⚠️ Mode lihat — tidak bisa mengubah");
-      return;
-    }
     const current = attendance[name];
     if (current === st) {
       setStatusConfirm({ name, nextStatus: null, label: "menghapus status " + st });
@@ -835,31 +917,10 @@ function AbsensiApp() {
     applyStatusChange(name, nextStatus);
   };
 
-  const markAllHadir = () => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin yang bisa menandai semua hadir");
-      return;
-    }
-    setAttendance(prev => {
-      const n = { ...prev };
-      list.forEach(s => n[s] = "HADIR");
-      return n;
-    });
-    setIzinReasons(prev => {
-      const n = { ...prev };
-      list.forEach(s => n[s] = "");
-      return n;
-    });
-    toast("✅ Semua ditandai Hadir");
-  };
-
   const markAllAlfa = () => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin");
-      return;
-    }
-    const belum = list.filter(s => !attendance[s]);
-    if (belum.length === 0) {
+    if (!isAdmin) return;
+    const belumDiisi = list.filter(s => !attendance[s]);
+    if (belumDiisi.length === 0) {
       toast("✅ Semua sudah ada keterangan — tidak ada yang diubah");
       return;
     }
@@ -873,22 +934,16 @@ function AbsensiApp() {
       list.forEach(s => { if (!attendance[s]) n[s] = ""; });
       return n;
     });
-    toast(`✅ ${belum.length} yang belum ada keterangan ditandai ALFA`);
+    toast(`✅ ${belumDiisi.length} yang belum ada keterangan ditandai ALFA`);
   };
 
   const openResetModal = () => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin yang bisa reset");
-      return;
-    }
+    if (!isAdmin) return;
     setResetConfirm(true);
   };
 
   const doReset = async () => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin yang bisa reset");
-      return;
-    }
+    if (!isAdmin) return;
     try {
       setSyncing(true);
       await db.ref(attendancePath(batch, dateStr)).set(null);
@@ -916,7 +971,7 @@ function AbsensiApp() {
     }
   };
 
-  // ===================== FORMAT 1: Rekap per kelompok =====================
+  // ===================== FORMAT 1 =====================
   const buildTextFor = (labelStr, listLocal, attLocal, izinLocal) => {
     const groups = { HADIR:[], SAKIT:[], IZIN:[], ALFA:[] };
     listLocal.forEach(n => { if (attLocal[n]) groups[attLocal[n]].push(n); });
@@ -941,24 +996,23 @@ function AbsensiApp() {
 
   const buildText = () => buildTextFor(batchLabel, list, attendance, izinReasons);
 
-  // ===================== FORMAT 2: Daftar per-siswa + emoji =====================
+  // ===================== FORMAT 2 =====================
   const buildText2For = (labelStr, listLocal, attLocal, izinLocal) => {
-    const [nameOnly, flag] = splitLabelFlag(labelStr);
     let t = `*ABSENSI KEHADIRAN SHALAT SUBUH PROGRAM ${labelStr.toUpperCase()}*\n_Hari : ${formatDateAbsensi(date)}_\n\n`;
     listLocal.forEach((n, i) => {
-  const st = normalizeStatus(attLocal[n]);
-  let emoji = "⬜";
-  let extra = "";
-  if (st === "HADIR") emoji = "✅";
-  else if (st === "SAKIT") emoji = "🆘";
-  else if (st === "ALFA") emoji = "❌";
-  else if (st === "IZIN") {
-    const reason = (izinLocal[n] || "").trim();
-    emoji = reason ? izinEmoji(reason) : "ℹ️";
-    if (reason) extra = ` (${reason})`;
-  }
-  t += `${i+1}. ${n} ${emoji}${extra}\n`;
-});
+      const st = normalizeStatus(attLocal[n]);
+      let emoji = "⬜";
+      let extra = "";
+      if (st === "HADIR") emoji = "✅";
+      else if (st === "SAKIT") emoji = "🆘";
+      else if (st === "ALFA") emoji = "❌";
+      else if (st === "IZIN") {
+        const reason = (izinLocal[n] || "").trim();
+        emoji = reason ? izinEmoji(reason) : "ℹ️";
+        if (reason) extra = ` (${reason})`;
+      }
+      t += `${i+1}. ${n} ${emoji}${extra}\n`;
+    });
     t += "\n";
     const c = { HADIR: 0, SAKIT: 0, IZIN: 0, ALFA: 0 };
     listLocal.forEach(n => {
@@ -993,21 +1047,13 @@ function AbsensiApp() {
     toast(ok ? "✅ Format 2 disalin!" : "⚠️ Teks siap — klik Kirim untuk buka WhatsApp");
   };
 
-  // Buka mini-menu Salin Pro
   const openSalinPro = () => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin yang bisa Salin Pro");
-      return;
-    }
+    if (!isAdmin) return;
     setShowSalinProMenu(true);
   };
 
-  // Eksekusi Salin Pro: format = "1" | "2"
   const doSalinPro = async (format = "1") => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin yang bisa Salin Pro");
-      return;
-    }
+    if (!isAdmin) return;
     setShowSalinProMenu(false);
     toast("⏳ Mengambil data semua program (Format " + format + ")…");
 
@@ -1092,22 +1138,38 @@ function AbsensiApp() {
     toast("📤 Membuka WhatsApp...");
   };
 
+  /* ===== ADD MEMBER: support multi-koma + auto uppercase ===== */
   const addMember = () => {
-    const name = newName.trim();
-    if (!name) {
-      toast("⚠️ Nama tidak boleh kosong");
+    const raw = newName.trim();
+    if (!raw) { toast("⚠️ Nama tidak boleh kosong"); return; }
+    const parts = raw.split(/[,;\n]+/).map(s => s.trim().toUpperCase()).filter(Boolean);
+    if (!parts.length) { toast("⚠️ Nama tidak boleh kosong"); return; }
+    const next = [...students];
+    const added = [];
+    const skipped = [];
+    parts.forEach(upper => {
+      if (next.some(s => s.toLowerCase() === upper.toLowerCase())) {
+        skipped.push(upper);
+      } else {
+        next.push(upper);
+        added.push(upper);
+      }
+    });
+    if (!added.length) {
+      toast("⚠️ " + (skipped.length === 1 ? "Nama sudah ada" : "Semua nama sudah ada") + " di daftar");
       return;
     }
-    const exists = students.some(s => s.toLowerCase() === name.toLowerCase());
-    if (exists) {
-      toast("⚠️ Nama sudah ada di daftar");
-      return;
-    }
-    const next = [...students, name].sort((a,b) => a.localeCompare(b, "id"));
+    next.sort((a, b) => a.localeCompare(b, "id"));
     setStudents(next);
     setNewName("");
     setShowAddForm(false);
-    toast(`✅ ${name} ditambahkan`);
+    if (skipped.length) {
+      toast(`✅ ${added.length} ditambah • ${skipped.length} dilewati (duplikat)`);
+    } else if (added.length === 1) {
+      toast(`✅ ${added[0]} ditambahkan`);
+    } else {
+      toast(`✅ ${added.length} nama ditambahkan`);
+    }
   };
 
   const confirmDelete = (name) => {
@@ -1132,10 +1194,205 @@ function AbsensiApp() {
     toast(`✅ ${name} dihapus`);
   };
 
+const openRename = (name) => {
+  setRenameTarget(name);
+  setRenameValue(name);
+};
+
+const doRename = async () => {
+  if (!renameTarget) return;
+  const oldName = renameTarget;
+  const newName = renameValue.trim().toUpperCase();
+  if (!newName) { toast("⚠️ Nama tidak boleh kosong"); return; }
+  if (newName === oldName) { setRenameTarget(null); return; }
+  if (students.some(s => s.toLowerCase() === newName.toLowerCase())) {
+    toast("⚠️ Nama \"" + newName + "\" sudah dipakai");
+    return;
+  }
+  setRenameSaving(true);
+  try {
+    // 1. Update array students
+    const next = students.map(s => s === oldName ? newName : s).sort((a,b)=>a.localeCompare(b,"id"));
+    await db.ref(studentsPath(batch)).set(next);
+    setStudents(next);
+
+    // 2. Rename key di SEMUA attendance (scan sekali)
+    const attSnap = await db.ref(`${FB_ROOT}/batch_${batch}/attendance`).once("value");
+    const all = attSnap.val() || {};
+    const oldKey = toFbKey(oldName);
+    const newKey = toFbKey(newName);
+    const updates = {};
+    let moved = 0;
+    Object.keys(all).forEach(dateKey => {
+      const day = all[dateKey];
+      if (!day || typeof day !== "object") return;
+      Object.keys(day).forEach(actKey => {
+        const act = day[actKey];
+        if (!act || typeof act !== "object") return;
+        if (act[oldKey] !== undefined) {
+          updates[`${FB_ROOT}/batch_${batch}/attendance/${dateKey}/${actKey}/${newKey}`] = act[oldKey];
+          updates[`${FB_ROOT}/batch_${batch}/attendance/${dateKey}/${actKey}/${oldKey}`] = null;
+          moved++;
+        }
+      });
+    });
+    if (Object.keys(updates).length) {
+      await db.ref().update(updates);
+    }
+
+    // 3. Update state lokal (attendance/izinReasons/historyMap)
+    setAttendance(prev => {
+      if (prev[oldName] === undefined) return prev;
+      const n = { ...prev };
+      n[newName] = n[oldName];
+      delete n[oldName];
+      return n;
+    });
+    setIzinReasons(prev => {
+      if (prev[oldName] === undefined) return prev;
+      const n = { ...prev };
+      n[newName] = n[oldName];
+      delete n[oldName];
+      return n;
+    });
+    setHistoryMap(prev => {
+      const out = {};
+      Object.keys(prev).forEach(ds => {
+        const day = { ...prev[ds] };
+        if (day[oldName] !== undefined) {
+          day[newName] = day[oldName];
+          delete day[oldName];
+        }
+        out[ds] = day;
+      });
+      return out;
+    });
+
+    toast("✅ " + oldName + " → " + newName + " (" + moved + " data dipindah)");
+    setRenameTarget(null);
+  } catch (err) {
+    console.warn("rename failed", err);
+    toast("⚠️ Gagal rename — cek koneksi");
+  }
+  setRenameSaving(false);
+};
+const openEditStudent = (name) => {
+  setEditStudent(name);
+  setEditRows([{
+    date: dateStr,
+    status: attendance[name] || "",
+    reason: izinReasons[name] || ""
+  }]);
+};
+
+const addEditRow = () => {
+  setEditRows(prev => [...prev, { date: dateStr, status: "", reason: "" }]);
+};
+
+const updateEditRow = (idx, patch) => {
+  setEditRows(prev => prev.map((r, i) => i === idx ? { ...r, ...patch } : r));
+};
+
+const removeEditRow = (idx) => {
+  setEditRows(prev => prev.filter((_, i) => i !== idx));
+};
+
+const saveEditStudent = async () => {
+  if (!editStudent) return;
+  const valid = editRows.filter(r => r.date);
+  if (!valid.length) { toast("⚠️ Isi minimal 1 baris"); return; }
+
+  const byDate = {};
+  valid.forEach(r => { byDate[r.date] = r; });
+
+  setEditSaving(true);
+  try {
+    for (const ds of Object.keys(byDate)) {
+      const r = byDate[ds];
+      const path = attendancePath(batch, ds);
+      const snap = await db.ref(path).once("value");
+      const val = snap.val() || {};
+      const next = { ...val };
+      const k = toFbKey(editStudent);
+      if (!r.status) {
+        delete next[k];
+        delete next[editStudent];
+      } else {
+        next[k] = {
+          status: r.status,
+          reason: r.status === "IZIN" ? (r.reason || "").trim() : ""
+        };
+        delete next[editStudent];
+      }
+      await db.ref(path).set(next);
+    }
+
+    const cur = byDate[dateStr];
+    if (cur !== undefined) {
+      setAttendance(prev => ({ ...prev, [editStudent]: cur.status || null }));
+      setIzinReasons(prev => ({ ...prev, [editStudent]: cur.status === "IZIN" ? (cur.reason || "") : "" }));
+    }
+
+    setHistoryMap(prev => {
+      const next = { ...prev };
+      Object.keys(byDate).forEach(ds => {
+        if (next[ds]) {
+          const dayMap = { ...next[ds] };
+          const r = byDate[ds];
+          if (!r.status) delete dayMap[editStudent];
+          else dayMap[editStudent] = r.status;
+          next[ds] = dayMap;
+        }
+      });
+      return next;
+    });
+
+    toast("✅ Absensi " + editStudent + " diupdate (" + Object.keys(byDate).length + " tanggal)");
+    setEditStudent(null);
+  } catch (err) {
+    console.warn("save edit failed", err);
+    toast("⚠️ Gagal menyimpan");
+  }
+  setEditSaving(false);
+};
+
   const resetToDefault = () => {
     const def = [...(BATCH_STUDENTS[batch] || [])];
     setStudents(def);
     toast("✅ Daftar dikembalikan ke default " + batchLabel);
+  };
+
+  /* ===== SEARCH: loader & navigasi ===== */
+  const loadAllStudents = async () => {
+    if (allStudentsCache) return allStudentsCache;
+    setSearchLoading(true);
+    const result = {};
+    await Promise.all(BATCH_LIST.map(async b => {
+      try {
+        const snap = await db.ref(studentsPath(b)).once("value");
+        let names = snap.val();
+        if (!Array.isArray(names) || !names.length) names = BATCH_STUDENTS[b] || [];
+        result[b] = names.map(n => String(n).trim()).filter(Boolean);
+      } catch {
+        result[b] = BATCH_STUDENTS[b] || [];
+      }
+    }));
+    setAllStudentsCache(result);
+    setSearchLoading(false);
+    return result;
+  };
+
+  const openSearch = () => {
+    setShowSearchModal(true);
+    setSearchQuery("");
+    if (!allStudentsCache) loadAllStudents();
+    setTimeout(() => searchInputRef.current?.focus(), 120);
+  };
+
+  const goToStudent = (name, batchId) => {
+    setShowSearchModal(false);
+    if (batchId !== batch) switchBatch(batchId);
+    setPendingScrollTo(name);
   };
 
   const switchBatch = (b) => {
@@ -1345,10 +1602,7 @@ function AbsensiApp() {
   };
 
   const exportAllProgramsXLS = async () => {
-    if (!isAdmin) {
-      toast("⚠️ Hanya admin");
-      return;
-    }
+    if (!isAdmin) return;
     const dateList = getDashboardDateList();
     if (!dateList.length) {
       toast("⚠️ Pilih periode dulu");
@@ -1385,8 +1639,13 @@ function AbsensiApp() {
   else statusText = "🟢 Online — terhubung Firebase";
 
   return h("div", {
-    style: { minHeight:"100vh", background: theme.bg, transition:"background .3s", paddingBottom:40 }
-  }, [
+  style: {
+    minHeight:"100vh",
+    background: (reminderActive && flashOn) ? "#fecaca" : theme.bg,
+    transition: "background .9s ease-in-out",
+    paddingBottom:40
+  }
+}, [
     h("div", {
       style: {
         position: "sticky", top: 0, zIndex: 50,
@@ -1407,6 +1666,7 @@ function AbsensiApp() {
           color: isAdmin ? "#fff" : "#475569"
         }
       }, isAdmin ? "MODE ADMIN" : "MODE SISWA"),
+
       !isAdmin && h("button", {
         onClick: () => {
           setAdminPassword("");
@@ -1443,7 +1703,17 @@ function AbsensiApp() {
         }
       }, "Keluar Admin")
     ]),
-    h("div", { style:{ maxWidth:960, margin:"0 auto", padding:"24px 16px 0" } }, [
+    reminderActive && h("div", {
+  style: {
+    background: "#dc2626", color: "#fff",
+    padding: "12px 16px", textAlign: "center",
+    fontSize: 13, fontWeight: 800, letterSpacing: "0.03em",
+    display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+    boxShadow: "0 4px 20px rgba(220,38,38,.3)",
+    animation: "fadeIn .3s ease"
+  }
+}, ["⏰ ", "10 MENIT LAGI JAM TUTUP — pastikan semua sudah diabsen!"]),
+h("div", { style:{ maxWidth:960, margin:"0 auto", padding:"24px 16px 0" } }, [
 
       h("div", {
         style: {
@@ -1470,7 +1740,7 @@ function AbsensiApp() {
             h("div", null, [
               h("div", { style:{ fontSize:18, fontWeight:800, letterSpacing:"-0.025em" } }, "ABSENSI KEHADIRAN SHALAT SUBUH"),
               h("div", { style:{ fontSize:11, fontWeight:600, letterSpacing:"0.14em", color:"rgba(0,0,0,.4)", marginTop:4 } },
-                `${batchLabel.toUpperCase()} • SHALAT SUBUH • ${students.length} SISWA • ${syncing ? "MENYIMPAN..." : loadingFb ? "MEMUAT..." : "LP2SSC"}`)
+                `${batchLabel.toUpperCase()} • SHALAT SUBUH • ${students.length} ORANG • ${syncing ? "MENYIMPAN..." : loadingFb ? "MEMUAT..." : "LP2SSC"}`)
             ])
           ]),
           h("div", { style:{ display:"flex", alignItems:"center", gap:8 } }, [
@@ -1484,7 +1754,6 @@ function AbsensiApp() {
                 onChange: e => {
                   if (!e.target.value) return;
                   setDate(new Date(e.target.value + "T00:00:00"));
-                  setDateMode("edit");
                 },
                 style: { position:"absolute", inset:0, opacity:0, width:"100%", height:"100%", cursor:"pointer" }
               }),
@@ -1503,13 +1772,27 @@ function AbsensiApp() {
         ]),
 
         h("div", { style:{ padding:"16px 20px 8px" } }, [
-          h("div", {
-            style: { display:"flex", gap:6, padding:6, borderRadius:16, background:"#f4f4f5" }
-          }, [
-            h("button", {
-              key: "JP",
+  h("div", { style:{ display:"flex", justifyContent:"flex-end", marginBottom:10 } },
+    h("button", {
+      onClick: openSearch,
+      title: "Cari nama di semua program",
+      style: {
+        height: 40, padding: "0 18px", borderRadius: 999,
+        border: "1px solid rgba(0,0,0,.15)",
+        background: "#fff", fontWeight: 800, fontSize: 13,
+        cursor: "pointer", color: "#0f172a",
+        boxShadow: "0 2px 8px rgba(0,0,0,.05)",
+        display: "flex", alignItems: "center", gap: 6
+      }
+    }, "🔍 Cari Nama")
+  ),
+  h("div", {
+    style: { display:"flex", gap:6, padding:6, borderRadius:16, background:"#f4f4f5" }
+  }, [
+    h("button", {
+      key: "JP",
               onClick: () => {
-                if (sectionOfBatch(batch) !== "JP") switchBatch("6");
+                if (sectionOfBatch(batch) !== "JP") switchBatch("1");
               },
               style: {
                 flex:1, height:48, borderRadius:12, fontWeight:700, fontSize:13,
@@ -1593,7 +1876,7 @@ function AbsensiApp() {
                 fontSize:11, fontWeight:700, letterSpacing:"0.1em",
                 padding:"6px 12px", borderRadius:999, background:"rgba(255,255,255,.25)"
               }
-            }, `${list.length} SISWA`)
+            }, `${list.length} ORANG`)
           ])
         ])
       ]),
@@ -1607,7 +1890,7 @@ function AbsensiApp() {
           fontSize: 13, fontWeight: 600
         }
       }, (autoResetEnabled && !isStudentAbsenOpen())
-        ? ("⛔ Absen siswa ditutup. Jadwal: " + fmtSchedule(autoOpenMin) + "–" + fmtSchedule(autoResetMin) + " WIB. Hanya admin yang bisa mengisi.")
+        ? ("⛔ Absensi siswa ditutup. Jadwal Buka: Jam " + fmtSchedule(autoOpenMin) + "–" + fmtSchedule(autoResetMin) + " WIB. Sekarang Hanya admin saja yang bisa mengisi!!!")
         : ("Mode Siswa: isi absen hari ini" + (autoResetEnabled ? (" · buka " + fmtSchedule(autoOpenMin) + "–" + fmtSchedule(autoResetMin) + " WIB") : "") + ". Fitur admin terkunci.")
       ),
       isAdmin && toInputDate(date) !== toInputDate(new Date()) && h("div", {
@@ -1659,14 +1942,6 @@ function AbsensiApp() {
       })),
 
       h("div", { style:{ marginTop:20, display:"flex", gap:10, flexWrap:"wrap", alignItems:"center" } }, [
-        isAdmin && h("button", {
-          onClick: markAllHadir,
-          style: {
-            height:44, padding:"0 18px", borderRadius:12, background:"#fff",
-            border:"1px solid rgba(0,0,0,.1)", fontWeight:700, fontSize:13,
-            boxShadow:"0 1px 2px rgba(0,0,0,.05)", cursor:"pointer"
-          }
-        }, "✓ Semua Hadir"),
         isAdmin && h("button", {
           onClick: markAllAlfa,
           title: "Tandai ALFA hanya untuk siswa yang belum ada keterangan",
@@ -1731,7 +2006,7 @@ function AbsensiApp() {
               color: belum ? "#b45309" : "#047857"
             }
           }, loadingFb ? "Memuat..." : (belum ? `${belum} belum absen` : "Semua sudah diabsen")),
-          h("span", { style:{ fontSize:11, letterSpacing:"0.1em" } }, `${list.length} SISWA`)
+          h("span", { style:{ fontSize:11, letterSpacing:"0.1em" } }, `${list.length} ORANG`)
         ])
       ]),
 
@@ -1760,7 +2035,7 @@ function AbsensiApp() {
               }
             }, showAddForm ? "Tutup Form" : "+ Tambah"),
             h("button", {
-              onClick: resetToDefault,
+              onClick: () => setDefaultConfirm(true),
               style: {
                 height: 36, padding: "0 12px", borderRadius: 10,
                 background: "#fff", border: "1px solid rgba(0,0,0,.1)",
@@ -1770,31 +2045,36 @@ function AbsensiApp() {
           ])
         ]),
 
-        showAddForm && h("div", {
-          style: {
-            display: "flex", gap: 8, marginBottom: 14, padding: 12,
-            background: "#f8fafc", borderRadius: 12, border: "1px solid #e2e8f0"
-          }
-        }, [
-          h("input", {
-            ref: addInputRef,
-            type: "text",
-            value: newName,
-            onChange: e => setNewName(e.target.value),
-            onKeyDown: e => { if (e.key === "Enter") addMember(); },
-            placeholder: "Nama lengkap anggota baru...",
+        showAddForm && h("div", { style: { marginBottom: 14 } }, [
+          h("div", {
             style: {
-              flex: 1, height: 42, padding: "0 14px", borderRadius: 10,
-              border: "1px solid #cbd5e1", fontSize: 14, fontWeight: 600, outline: "none"
+              display: "flex", gap: 8, padding: 12,
+              background: "#f8fafc", borderRadius: 12, border: "1px solid #e2e8f0"
             }
-          }),
-          h("button", {
-            onClick: addMember,
-            style: {
-              height: 42, padding: "0 18px", borderRadius: 10, border: "none",
-              background: "#0f172a", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer"
-            }
-          }, "Tambah")
+          }, [
+            h("input", {
+              ref: addInputRef,
+              type: "text",
+              value: newName,
+              onChange: e => setNewName(e.target.value),
+              onKeyDown: e => { if (e.key === "Enter") addMember(); },
+              placeholder: "Contoh: Adit, Udin, Sari",
+              style: {
+                flex: 1, height: 42, padding: "0 14px", borderRadius: 10,
+                border: "1px solid #cbd5e1", fontSize: 14, fontWeight: 600, outline: "none"
+              }
+            }),
+            h("button", {
+              onClick: addMember,
+              style: {
+                height: 42, padding: "0 18px", borderRadius: 10, border: "none",
+                background: "#0f172a", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer"
+              }
+            }, "Tambah")
+          ]),
+          h("div", {
+            style: { fontSize: 11, color: "#64748b", marginTop: 6, paddingLeft: 4, fontWeight: 600 }
+          }, "💡 Bisa input beberapa nama sekaligus, pisahkan dengan koma. Otomatis jadi KAPITAL.")
         ]),
 
         h("div", {
@@ -1819,9 +2099,19 @@ function AbsensiApp() {
               }
             }, i + 1),
             h("span", { style: { flex: 1, fontWeight: 700, fontSize: 14, color: "#1e293b" } }, name),
-            h("button", {
-              onClick: () => confirmDelete(name),
-              title: "Hapus anggota",
+h("button", {
+  onClick: () => openRename(name),
+  title: "Ganti nama (riwayat tetap aman)",
+  style: {
+    width: 32, height: 32, borderRadius: 8, border: "none",
+    background: "rgba(59,130,246,.1)", color: "#2563eb",
+    fontSize: 14, cursor: "pointer", display: "flex",
+    alignItems: "center", justifyContent: "center"
+  }
+}, "✏️"),
+h("button", {
+  onClick: () => confirmDelete(name),
+  title: "Hapus anggota",
               style: {
                 width: 32, height: 32, borderRadius: 8, border: "none",
                 background: "rgba(239,68,68,.1)", color: "#dc2626",
@@ -1840,6 +2130,7 @@ function AbsensiApp() {
         const meta = st ? STATUS[st] : null;
         return h("div", {
           key: name,
+          "data-student-name": name,
           style: {
             borderRadius:20, background: meta ? meta.bg : "#fff",
             border: `2px solid ${meta ? meta.border : "rgba(0,0,0,.06)"}`,
@@ -1863,22 +2154,34 @@ function AbsensiApp() {
                 h("span", {
                   style: { fontWeight:800, fontSize:15, color: meta ? meta.text : "#111", letterSpacing:"-0.025em" }
                 }, name),
-                (st && meta)
-                  ? h("span", {
-                      style: {
-                        fontSize:10, fontWeight:800, letterSpacing:"0.1em",
-                        padding:"2px 8px", borderRadius:999, background:"#fff",
-                        border: `1px solid ${meta.border}`, color: meta.text
-                      }
-                    }, `${meta.icon} ${st}`)
-                  : h("span", {
-                      style: {
-                        fontSize:10, fontWeight:700, letterSpacing:"0.1em",
-                        padding:"2px 8px", borderRadius:999, background:"rgba(0,0,0,.04)",
-                        color:"rgba(0,0,0,.3)"
-                      }
-                    }, "BELUM")
-              ]),
+                  (st && meta)
+    ? h("span", {
+        style: {
+          fontSize:10, fontWeight:800, letterSpacing:"0.1em",
+          padding:"2px 8px", borderRadius:999, background:"#fff",
+          border: `1px solid ${meta.border}`, color: meta.text
+        }
+      }, `${meta.icon} ${st}`)
+    : h("span", {
+        style: {
+          fontSize:10, fontWeight:700, letterSpacing:"0.1em",
+          padding:"2px 8px", borderRadius:999, background:"rgba(0,0,0,.04)",
+          color:"rgba(0,0,0,.3)"
+        }
+      }, "BELUM"),
+  isAdmin && h("button", {
+    onClick: () => openEditStudent(name),
+    title: "Edit absensi siswa ini (semua tanggal)",
+    style: {
+      marginLeft: "auto", flexShrink: 0,
+      height: 26, padding: "0 10px", borderRadius: 999,
+      border: "1px solid rgba(0,0,0,.12)",
+      background: "#fff", color: "#0f172a",
+      fontWeight: 800, fontSize: 10, letterSpacing: "0.05em",
+      cursor: "pointer", display: "flex", alignItems: "center", gap: 4
+    }
+  }, "✏️ EDIT")
+]),
               h("div", { style:{ marginTop:2, fontSize:11, fontWeight:500, color:"rgba(0,0,0,.4)" } },
                 st === "IZIN" && izinReasons[name]
                   ? `Izin: ${izinReasons[name]}`
@@ -1924,23 +2227,23 @@ function AbsensiApp() {
             }, k);
           })),
           st === "IZIN" && izinReasons[name] && h("div", {
-            style: {
-              marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between",
-              gap: 8, padding: "8px 12px", borderRadius: 10,
-              background: "rgba(59,130,246,.1)", border: "1px solid rgba(59,130,246,.2)"
-            }
-          }, [
-            h("div", { style: { fontSize: 12, fontWeight: 700, color: "#1e3a8a", minWidth: 0 } },
-              `${izinEmoji(izinReasons[name])} ${izinReasons[name]}`),
-            h("button", {
-              onClick: () => setChangeReasonConfirm(name),
-              style: {
-                flexShrink: 0, padding: "4px 10px", borderRadius: 8, fontSize: 11, fontWeight: 700,
-                border: "1px solid rgba(59,130,246,.35)", background: "#fff", color: "#1e40af",
-                cursor: "pointer"
-              }
-            }, "Ganti")
-          ])
+  style: {
+    marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between",
+    gap: 8, padding: "8px 12px", borderRadius: 10,
+    background: "rgba(59,130,246,.1)", border: "1px solid rgba(59,130,246,.2)"
+  }
+}, [
+  h("div", { style: { fontSize: 12, fontWeight: 700, color: "#1e3a8a", minWidth: 0 } },
+    `${izinEmoji(izinReasons[name])} ${izinReasons[name]}`),
+  isAdmin && h("button", {
+    onClick: () => setChangeReasonConfirm(name),
+    style: {
+      flexShrink: 0, padding: "4px 10px", borderRadius: 8, fontSize: 11, fontWeight: 700,
+      border: "1px solid rgba(59,130,246,.35)", background: "#fff", color: "#1e40af",
+      cursor: "pointer"
+    }
+  }, "Ganti")
+])
         ]);
       })),
 
@@ -1994,7 +2297,7 @@ function AbsensiApp() {
             width:"100%", padding:"14px 16px", borderRadius:16, background:"#f8fafc",
             border:"1px dashed #cbd5e1", textAlign:"center", fontSize:12, fontWeight:600, color:"#94a3b8"
           }
-        }, "Fitur salin terbuka setelah lewat jam tutup. Salin Pro & reset hanya untuk Admin."),
+        }, "Fitur salin terbuka setelah lewat jam tutup. Jadi sekarang belum bisa"),
         h("div", {
           style: { marginTop:12, textAlign:"center", fontSize:11, fontWeight:500, color:"rgba(0,0,0,.3)" }
         }, `Format 1: rekap kelompok • Format 2: daftar per-siswa + emoji • Total ${list.length} orang`)
@@ -2497,7 +2800,7 @@ function AbsensiApp() {
                       let color = "#94a3b8";
                       if (st === "HADIR") { bg = "#dcfce7"; color = "#166534"; }
                       else if (st === "IZIN") { bg = "#dbeafe"; color = "#1e40af"; }
-                      else if (st === "SAKIT") { bg = "#fef9c3"; color = "#854d0e"; }
+                      else if (st === "SAKIT") { bg = "#f3e8ff"; color = "#6b21a8"; }
                       else if (st === "ALFA") { bg = "#fee2e2"; color = "#991b1b"; }
                       return h("td", {
                         key: ds,
@@ -2787,7 +3090,359 @@ function AbsensiApp() {
       ])
     ]),
 
-    h(Toast, { msg: toastMsg, visible: toastVisible })
+    /* ============ MODAL: KONFIRMASI DEFAULT ============ */
+    defaultConfirm && h("div", {
+      style: {
+        position:"fixed", inset:0, zIndex:150,
+        display:"flex", alignItems:"center", justifyContent:"center", padding:16
+      }
+    }, [
+      h("div", {
+        onClick: () => setDefaultConfirm(false),
+        style: { position:"absolute", inset:0, background:"rgba(0,0,0,.5)", backdropFilter:"blur(6px)" }
+      }),
+      h("div", {
+        style: {
+          position:"relative", width:"100%", maxWidth:380, borderRadius:24,
+          background:"#fff", padding:24, boxShadow:"0 20px 60px -12px rgba(0,0,0,.4)",
+          animation:"scaleIn .25s ease"
+        }
+      }, [
+        h("div", { style:{ display:"flex", gap:12, alignItems:"flex-start" } }, [
+          h("div", {
+            style: {
+              width:40, height:40, borderRadius:999, flexShrink:0,
+              background:"#fef3c7", color:"#d97706",
+              display:"flex", alignItems:"center", justifyContent:"center", fontSize:18
+            }
+          }, "↺"),
+          h("div", { style:{ flex:1 } }, [
+            h("div", { style:{ fontSize:15, fontWeight:700, color:"#18181b" } }, "Kembalikan ke daftar default?"),
+            h("div", { style:{ marginTop:6, fontSize:13, color:"#52525b", lineHeight:1.45 } }, [
+              "Daftar anggota ", h("span", { style:{ fontWeight:700 } }, batchLabel),
+              " akan dikembalikan ke daftar bawaan (",
+              h("span", { style:{ fontWeight:700 } }, (BATCH_STUDENTS[batch] || []).length + " orang"),
+              "). ",
+              h("span", { style:{ fontWeight:700, color:"#b45309" } },
+                "Perubahan & nama tambahan akan HILANG."),
+              " Tidak bisa dibatalkan."
+            ])
+          ])
+        ]),
+        h("div", { style:{ marginTop:24, display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 } }, [
+          h("button", {
+            onClick: () => setDefaultConfirm(false),
+            style: {
+              borderRadius:999, background:"#f4f4f5", border:"1px solid #e4e4e7",
+              padding:"12px 16px", fontSize:13, fontWeight:700, color:"#3f3f46", cursor:"pointer"
+            }
+          }, "Batal"),
+          h("button", {
+            onClick: () => { resetToDefault(); setDefaultConfirm(false); },
+            style: {
+              borderRadius:999, background:"#ef4444", border:"none", color:"#fff",
+              padding:"12px 16px", fontSize:13, fontWeight:700, cursor:"pointer"
+            }
+          }, "Ya, Default")
+        ])
+      ])
+    ]),
+
+    /* ============ MODAL: SEARCH NAMA ============ */
+    showSearchModal && h("div", {
+      style: {
+        position:"fixed", inset:0, zIndex:180,
+        display:"flex", alignItems:"flex-start", justifyContent:"center",
+        padding:16, paddingTop:80
+      }
+    }, [
+      h("div", {
+        onClick: () => setShowSearchModal(false),
+        style: { position:"absolute", inset:0, background:"rgba(0,0,0,.5)", backdropFilter:"blur(6px)" }
+      }),
+      h("div", {
+        style: {
+          position:"relative", width:"100%", maxWidth:480, borderRadius:24,
+          background:"#fff", boxShadow:"0 20px 60px -12px rgba(0,0,0,.4)",
+          animation:"scaleIn .25s ease", overflow:"hidden",
+          maxHeight: "calc(100vh - 120px)", display:"flex", flexDirection: "column"
+        }
+      }, [
+        h("div", {
+          style: { padding: 16, borderBottom: "1px solid #eee", display: "flex", gap: 10, alignItems: "center" }
+        }, [
+          h("span", { style: { fontSize: 18 } }, "🔍"),
+          h("input", {
+            ref: searchInputRef,
+            type: "text",
+            value: searchQuery,
+            onChange: e => setSearchQuery(e.target.value),
+            placeholder: "Cari nama di semua program...",
+            style: {
+              flex: 1, height: 42, padding: "0 8px", borderRadius: 10,
+              border: "none", outline: "none", fontSize: 15, fontWeight: 600
+            }
+          }),
+          h("button", {
+            onClick: () => setShowSearchModal(false),
+            style: {
+              width: 32, height: 32, borderRadius: 999, border: "none",
+              background: "#f4f4f5", color: "#71717a", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14
+            }
+          }, "✕")
+        ]),
+        h("div", { style: { overflowY: "auto", flex: 1 } }, [
+          searchLoading && h("div", {
+            style: { padding: 24, textAlign: "center", color: "#64748b", fontWeight: 600 }
+          }, "Memuat data..."),
+          !searchLoading && !searchQuery && h("div", {
+            style: { padding: 24, textAlign: "center", color: "#94a3b8", fontWeight: 600, fontSize: 13 }
+          }, "Ketik nama untuk mencari di semua program"),
+          !searchLoading && searchQuery && searchResults.length === 0 && h("div", {
+            style: { padding: 24, textAlign: "center", color: "#94a3b8", fontWeight: 600, fontSize: 13 }
+          }, ["Tidak ada nama yang cocok dengan ", h("strong", null, `"${searchQuery}"`)]),
+          !searchLoading && searchQuery && searchResults.length > 0 && h("div", null, [
+            h("div", {
+              style: { padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#94a3b8", letterSpacing: "0.06em" }
+            }, `${searchResults.length} HASIL`),
+            ...searchResults.map((r, i) =>
+              h("button", {
+                key: r.batch + "-" + r.name + "-" + i,
+                onClick: () => goToStudent(r.name, r.batch),
+                style: {
+                  display: "flex", alignItems: "center", gap: 12,
+                  width: "100%", padding: "12px 16px", border: "none",
+                  background: "transparent", cursor: "pointer", textAlign: "left",
+                  borderBottom: "1px solid #f1f5f9", transition: "background .15s"
+                },
+                onMouseEnter: e => { e.currentTarget.style.background = "#f8fafc"; },
+                onMouseLeave: e => { e.currentTarget.style.background = "transparent"; }
+              }, [
+                h("span", {
+                  style: {
+                    width: 32, height: 32, borderRadius: 999, flexShrink: 0,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 11, fontWeight: 800,
+                    background: (BATCH_THEME[r.batch] && BATCH_THEME[r.batch].accentLight) || "#e2e8f0",
+                    color: (BATCH_THEME[r.batch] && BATCH_THEME[r.batch].accentDark) || "#475569"
+                  }
+                }, r.batch === "MM" ? "MM" : r.batch === "MS" ? "MS" : r.batch === "TR" ? "TR" : ("B" + r.batch)),
+                h("div", { style: { flex: 1, minWidth: 0 } }, [
+                  h("div", { style: { fontSize: 14, fontWeight: 700, color: "#1e293b" } }, r.name),
+                  h("div", { style: { fontSize: 11, fontWeight: 600, color: "#94a3b8", marginTop: 2 } }, r.label)
+                ]),
+                h("span", { style: { fontSize: 11, color: "#cbd5e1" } }, "→")
+              ])
+            )
+          ])
+        ])
+      ])
+    ]),
+
+renameTarget && h("div", {
+  style: {
+    position:"fixed", inset:0, zIndex:210,
+    display:"flex", alignItems:"center", justifyContent:"center", padding:16
+  }
+}, [
+  h("div", {
+    onClick: () => { if (!renameSaving) setRenameTarget(null); },
+    style: { position:"absolute", inset:0, background:"rgba(0,0,0,.5)", backdropFilter:"blur(6px)" }
+  }),
+  h("div", {
+    style: {
+      position:"relative", width:"100%", maxWidth:400, borderRadius:24,
+      background:"#fff", padding:24, boxShadow:"0 20px 60px -12px rgba(0,0,0,.4)",
+      animation:"scaleIn .25s ease"
+    }
+  }, [
+    h("div", { style:{ display:"flex", gap:12, alignItems:"flex-start", marginBottom:16 } }, [
+      h("div", {
+        style: {
+          width:40, height:40, borderRadius:999, flexShrink:0,
+          background:"#dbeafe", color:"#2563eb",
+          display:"flex", alignItems:"center", justifyContent:"center", fontSize:18
+        }
+      }, "✏️"),
+      h("div", { style:{ flex:1 } }, [
+        h("div", { style:{ fontSize:15, fontWeight:700, color:"#18181b" } }, "Ganti Nama Anggota"),
+        h("div", { style:{ marginTop:4, fontSize:12, color:"#64748b", fontWeight:600, lineHeight:1.4 } },
+          "Semua riwayat absensi akan otomatis dipindahkan ke nama baru. Data lama tidak hilang.")
+      ])
+    ]),
+    h("div", { style:{ fontSize:11, fontWeight:700, color:"#94a3b8", marginBottom:6 } }, "NAMA LAMA"),
+    h("div", {
+      style: {
+        padding: "10px 14px", borderRadius: 10, background: "#f8fafc",
+        border: "1px solid #e2e8f0", fontSize: 13, fontWeight: 700, color: "#475569",
+        marginBottom: 12
+      }
+    }, renameTarget),
+    h("div", { style:{ fontSize:11, fontWeight:700, color:"#94a3b8", marginBottom:6 } }, "NAMA BARU"),
+    h("input", {
+      type: "text",
+      value: renameValue,
+      autoFocus: true,
+      onChange: e => setRenameValue(e.target.value),
+      onKeyDown: e => { if (e.key === "Enter") doRename(); },
+      style: {
+        width: "100%", padding: "12px 14px", borderRadius: 12, fontSize: 15, fontWeight: 700,
+        border: "1px solid #cbd5e1", outline: "none", marginBottom: 16,
+        textTransform: "uppercase"
+      }
+    }),
+    h("div", { style:{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 } }, [
+      h("button", {
+        onClick: () => { if (!renameSaving) setRenameTarget(null); },
+        disabled: renameSaving,
+        style: {
+          borderRadius:999, background:"#f4f4f5", border:"1px solid #e4e4e7",
+          padding:"12px 16px", fontSize:13, fontWeight:700, color:"#3f3f46",
+          cursor: renameSaving ? "wait" : "pointer", opacity: renameSaving ? 0.6 : 1
+        }
+      }, "Batal"),
+      h("button", {
+        onClick: doRename,
+        disabled: renameSaving,
+        style: {
+          borderRadius:999, background:"#0f172a", border:"none", color:"#fff",
+          padding:"12px 16px", fontSize:13, fontWeight:700,
+          cursor: renameSaving ? "wait" : "pointer", opacity: renameSaving ? 0.6 : 1
+        }
+      }, renameSaving ? "Memproses..." : "Ganti Nama")
+    ])
+  ])
+]),
+    editStudent && h("div", {
+  style: {
+    position:"fixed", inset:0, zIndex:200,
+    display:"flex", alignItems:"center", justifyContent:"center", padding:16
+  }
+}, [
+  h("div", {
+    onClick: () => { if (!editSaving) setEditStudent(null); },
+    style: { position:"absolute", inset:0, background:"rgba(0,0,0,.5)", backdropFilter:"blur(6px)" }
+  }),
+  h("div", {
+    style: {
+      position:"relative", width:"100%", maxWidth:480, borderRadius:24,
+      background:"#fff", padding:24, boxShadow:"0 20px 60px -12px rgba(0,0,0,.4)",
+      animation:"scaleIn .25s ease", maxHeight:"88vh", overflow:"auto"
+    }
+  }, [
+    h("div", { style:{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:14 } }, [
+      h("div", null, [
+        h("div", { style:{ fontSize:16, fontWeight:800 } }, "✏️ Edit Absensi"),
+        h("div", { style:{ fontSize:12, color:"#64748b", fontWeight:600, marginTop:2 } }, editStudent + " · " + batchLabel)
+      ]),
+      h("button", {
+        onClick: () => { if (!editSaving) setEditStudent(null); },
+        style: {
+          width:32, height:32, borderRadius:999, border:"none",
+          background:"#f4f4f5", color:"#71717a", cursor:"pointer",
+          display:"flex", alignItems:"center", justifyContent:"center", fontSize:14
+        }
+      }, "✕")
+    ]),
+    h("div", {
+      style: {
+        fontSize:12, color:"#64748b", fontWeight:600, marginBottom:14,
+        background: "#f8fafc", padding: "10px 12px", borderRadius: 10,
+        border: "1px solid #e2e8f0", lineHeight: 1.5
+      }
+    }, "Bisa edit beberapa tanggal sekaligus. Pilih status \"— Kosong —\" untuk menghapus absensi di tanggal tersebut."),
+    h("div", { style:{ display:"grid", gap:10, marginBottom:14 } },
+      editRows.map((r, i) =>
+        h("div", {
+          key: i,
+          style: {
+            border: "1px solid #e2e8f0", borderRadius: 14,
+            padding: 12, background: "#fafafa"
+          }
+        }, [
+          h("div", { style:{ display:"flex", gap:8, alignItems:"center", marginBottom: r.status === "IZIN" ? 8 : 0 } }, [
+            h("input", {
+              type: "date",
+              value: r.date,
+              onChange: e => updateEditRow(i, { date: e.target.value }),
+              style: {
+                flex: 1, height: 40, padding: "0 10px", borderRadius: 10,
+                border: "1px solid #cbd5e1", fontSize: 13, fontWeight: 600,
+                background: "#fff", outline: "none"
+              }
+            }),
+            h("select", {
+              value: r.status,
+              onChange: e => updateEditRow(i, { status: e.target.value }),
+              style: {
+                width: 118, height: 40, padding: "0 8px", borderRadius: 10,
+                border: "1px solid #cbd5e1", fontSize: 12, fontWeight: 700,
+                background: "#fff", outline: "none", cursor: "pointer"
+              }
+            }, [
+              h("option", { value: "" }, "— Kosong —"),
+              h("option", { value: "HADIR" }, "✅ Hadir"),
+              h("option", { value: "IZIN" }, "ℹ️ Izin"),
+              h("option", { value: "SAKIT" }, "🆘 Sakit"),
+              h("option", { value: "ALFA" }, "❌ Alfa")
+            ]),
+            editRows.length > 1 && h("button", {
+              onClick: () => removeEditRow(i),
+              title: "Hapus baris ini",
+              style: {
+                width: 36, height: 40, flexShrink: 0, borderRadius: 10,
+                border: "1px solid rgba(239,68,68,.25)", background: "#fff",
+                color: "#dc2626", cursor: "pointer", fontSize: 14
+              }
+            }, "🗑")
+          ]),
+          r.status === "IZIN" && h("input", {
+            type: "text",
+            value: r.reason || "",
+            onChange: e => updateEditRow(i, { reason: e.target.value }),
+            placeholder: "Alasan izin (Haid, Pulang, Masak, ...)",
+            style: {
+              width: "100%", height: 38, padding: "0 12px", borderRadius: 10,
+              border: "1px solid #cbd5e1", fontSize: 13, fontWeight: 600,
+              background: "#fff", outline: "none"
+            }
+          })
+        ])
+      )
+    ),
+    h("button", {
+      onClick: addEditRow,
+      style: {
+        width: "100%", height: 42, borderRadius: 12, marginBottom: 16,
+        border: "2px dashed #cbd5e1", background: "#fff",
+        color: "#475569", fontWeight: 700, fontSize: 13, cursor: "pointer"
+      }
+    }, "+ Tambah Baris (Tanggal Lain)"),
+    h("div", { style:{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 } }, [
+      h("button", {
+        onClick: () => { if (!editSaving) setEditStudent(null); },
+        disabled: editSaving,
+        style: {
+          borderRadius:999, background:"#f4f4f5", border:"1px solid #e4e4e7",
+          padding:"12px 16px", fontSize:13, fontWeight:700, color:"#3f3f46",
+          cursor: editSaving ? "wait" : "pointer", opacity: editSaving ? 0.6 : 1
+        }
+      }, "Batal"),
+      h("button", {
+        onClick: saveEditStudent,
+        disabled: editSaving,
+        style: {
+          borderRadius:999, background:"#0f172a", border:"none", color:"#fff",
+          padding:"12px 16px", fontSize:13, fontWeight:700,
+          cursor: editSaving ? "wait" : "pointer", opacity: editSaving ? 0.6 : 1
+        }
+      }, editSaving ? "Menyimpan..." : "Simpan")
+    ])
+  ])
+]),
+
+h(Toast, { msg: toastMsg, visible: toastVisible })
   ]);
 }
 
