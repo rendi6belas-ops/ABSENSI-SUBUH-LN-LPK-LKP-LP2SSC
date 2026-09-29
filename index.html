@@ -356,6 +356,7 @@ function AbsensiApp() {
   const studentsLoadedFor = useRef(null);
   const autoResetRunning = useRef(false);
   const lastWibDateRef = useRef(null);
+  const dirtyRef = useRef(new Set());   // FIX A: track siswa yang benar-benar diubah lokal
 
   /* ===== STATE BARU: default confirm + search ===== */
   const [defaultConfirm, setDefaultConfirm] = useState(false);
@@ -372,12 +373,73 @@ const [reminderActive, setReminderActive] = useState(false);
 const [flashOn, setFlashOn] = useState(false);
 const [editRows, setEditRows] = useState([]);
 const [editSaving, setEditSaving] = useState(false);
+  const [alfaConfirm, setAlfaConfirm] = useState(false);
+  const [undoStack, setUndoStack] = useState([]);
+  const [redoStack, setRedoStack] = useState([]);
   const searchInputRef = useRef(null);
 
   const toast = (msg) => {
     setToastMsg(msg);
     setToastVisible(true);
     setTimeout(() => setToastVisible(false), 2800);
+  };
+
+  const snapshotNow = () => ({
+    attendance: { ...attendance },
+    izinReasons: { ...izinReasons }
+  });
+
+  const pushHistory = () => {
+    const snap = snapshotNow();
+    setUndoStack(prev => {
+      const next = [...prev, snap];
+      return next.length > 50 ? next.slice(next.length - 50) : next;
+    });
+    setRedoStack([]);
+  };
+
+  const markDirty = (name) => {
+    if (name) dirtyRef.current.add(name);
+  };
+  const markDirtyMany = (names) => {
+    names.forEach(n => dirtyRef.current.add(n));
+  };
+  const markDirtyDiff = (beforeAtt, afterAtt, beforeReas, afterReas) => {
+    const names = new Set([
+      ...Object.keys(beforeAtt || {}),
+      ...Object.keys(afterAtt || {})
+    ]);
+    names.forEach(n => {
+      const a1 = normalizeStatus(beforeAtt?.[n]) || null;
+      const a2 = normalizeStatus(afterAtt?.[n]) || null;
+      const r1 = beforeReas?.[n] || "";
+      const r2 = afterReas?.[n] || "";
+      if (a1 !== a2 || r1 !== r2) dirtyRef.current.add(n);
+    });
+  };
+
+  const doUndo = () => {
+    if (!undoStack.length) { toast("⚠️ Tidak ada yang bisa di-undo"); return; }
+    const target = undoStack[undoStack.length - 1];
+    const current = snapshotNow();
+    setUndoStack(s => s.slice(0, -1));
+    setRedoStack(s => [...s, current]);
+    markDirtyDiff(current.attendance, target.attendance, current.izinReasons, target.izinReasons);
+    setAttendance(target.attendance);
+    setIzinReasons(target.izinReasons);
+    toast("↶ Undo");
+  };
+
+  const doRedo = () => {
+    if (!redoStack.length) { toast("⚠️ Tidak ada yang bisa di-redo"); return; }
+    const target = redoStack[redoStack.length - 1];
+    const current = snapshotNow();
+    setRedoStack(s => s.slice(0, -1));
+    setUndoStack(s => [...s, current]);
+    markDirtyDiff(current.attendance, target.attendance, current.izinReasons, target.izinReasons);
+    setAttendance(target.attendance);
+    setIzinReasons(target.izinReasons);
+    toast("↷ Redo");
   };
 
   const dateStr = toInputDate(date);
@@ -471,6 +533,28 @@ const [editSaving, setEditSaving] = useState(false);
     return () => clearInterval(id);
   }, []);
 
+  // Reset undo/redo & dirty saat ganti tanggal atau program
+  useEffect(() => {
+    setUndoStack([]);
+    setRedoStack([]);
+    dirtyRef.current.clear();
+  }, [dateStr, batch]);
+
+  // Shortcut keyboard Ctrl+Z / Ctrl+Shift+Z untuk undo/redo
+  useEffect(() => {
+    if (!isAdmin) return;
+    const handler = (e) => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      if (String(e.key).toLowerCase() !== "z") return;
+      const tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      e.preventDefault();
+      if (e.shiftKey) doRedo(); else doUndo();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [isAdmin, undoStack, redoStack, attendance, izinReasons]);
+
 // Cegah keluar saat masih ada perubahan belum tersimpan
 useEffect(() => {
   const handler = (e) => {
@@ -535,35 +619,38 @@ useEffect(() => {
           const attPath = attendancePath(b, today);
           const attSnap = await db.ref(attPath).once("value");
           const existing = attSnap.val() || {};
-          const next = { ...existing };
+          const updates = {};
           let changed = false;
 
-          const safeNext = {};
-          Object.keys(next).forEach(k => {
+          // Normalisasi key yang sudah ada (kalau ada versi unicode-escaped)
+          const existingByRealName = {};
+          Object.keys(existing).forEach(k => {
             const name = fromFbKey(k);
-            const item = next[k];
+            const item = existing[k];
             const st = item && typeof item === "object" ? normalizeStatus(item.status) : normalizeStatus(item);
             if (st) {
-              safeNext[toFbKey(name)] = (item && typeof item === "object")
+              existingByRealName[name] = (item && typeof item === "object")
                 ? { status: st, reason: item.reason || "" }
                 : { status: st, reason: "" };
-            }
-          });
-          names.forEach(n => {
-            const k = toFbKey(n);
-            const item = safeNext[k] || next[n] || next[k];
-            const st = item && typeof item === "object" ? normalizeStatus(item.status) : normalizeStatus(item);
-            if (!st) {
-              safeNext[k] = { status: "ALFA", reason: "" };
-              changed = true;
-              totalFilled++;
-            } else if (!safeNext[k]) {
-              safeNext[k] = { status: st, reason: (item && item.reason) || "" };
+              // pastikan key tersimpan dalam bentuk toFbKey
+              if (k !== toFbKey(name)) {
+                updates[toFbKey(name)] = existingByRealName[name];
+                updates[k] = null;
+                changed = true;
+              }
             }
           });
 
-          if (changed || Object.keys(safeNext).length) {
-            await db.ref(attPath).set(safeNext);
+          names.forEach(n => {
+            if (!existingByRealName[n]) {
+              updates[toFbKey(n)] = { status: "ALFA", reason: "" };
+              changed = true;
+              totalFilled++;
+            }
+          });
+
+          if (changed && Object.keys(updates).length) {
+            await db.ref(attPath).update(updates);
           }
         }
 
@@ -625,6 +712,7 @@ useEffect(() => {
     studentsLoadedFor.current = null;
     setLoadingFb(true);
     skipNextSave.current = true;
+    dirtyRef.current.clear();
     const local = loadStudentsLocal(batch);
     setStudents(local);
 
@@ -654,6 +742,7 @@ useEffect(() => {
     if (studentsLoadedFor.current !== batch) return;
     setLoadingFb(true);
     skipNextSave.current = true;
+    dirtyRef.current.clear();
     const path = attendancePath(batch, dateStr);
     const ref = db.ref(path);
     ref.once("value").then(snap => {
@@ -680,6 +769,7 @@ useEffect(() => {
       setAttendance(nextAtt);
       setIzinReasons(nextReas);
       setLoadingFb(false);
+      dirtyRef.current.clear();
       setTimeout(() => { skipNextSave.current = false; }, 120);
     }).catch(err => {
       console.warn("Firebase attendance load failed", err);
@@ -689,6 +779,7 @@ useEffect(() => {
       setAttendance(empty);
       setIzinReasons(emptyR);
       setLoadingFb(false);
+      dirtyRef.current.clear();
       setTimeout(() => { skipNextSave.current = false; }, 120);
       toast("⚠️ Gagal load absensi — mode offline");
     });
@@ -748,25 +839,42 @@ useEffect(() => {
     });
   }, [attendance, dateStr, students, loadingFb]);
 
-  // Save attendance
+  // ===================== FIX A: SAVE HANYA SISWA YANG DIUBAH (update per-key) =====================
   useEffect(() => {
     if (loadingFb || skipNextSave.current) return;
     if (studentsLoadedFor.current !== batch) return;
-    if (!Object.keys(attendance).length) return;
+    if (!dirtyRef.current.size) return;
+
+    // Ambil snapshot dirty lalu langsung clear, biar kalau ada perubahan baru
+    // selama request, dia masuk ke antrian berikutnya.
+    const dirtyNames = Array.from(dirtyRef.current);
+    dirtyRef.current.clear();
+
     setSyncing(true);
     setSaveStatus("saving");
-    const payload = {};
-    students.forEach(n => {
-      const st = normalizeStatus(attendance[n]);
+
+    const updates = {};
+    dirtyNames.forEach(name => {
+      const key = toFbKey(name);
+      const st = normalizeStatus(attendance[name]);
       if (st) {
-        payload[toFbKey(n)] = {
+        updates[key] = {
           status: st,
-          reason: st === "IZIN" ? (izinReasons[n] || "") : ""
+          reason: st === "IZIN" ? (izinReasons[name] || "") : ""
         };
+      } else {
+        updates[key] = null;  // null = hapus key di Firebase (bukan sentuh key lain)
       }
     });
+
+    if (!Object.keys(updates).length) {
+      setSyncing(false);
+      setSaveStatus("saved");
+      return;
+    }
+
     const path = attendancePath(batch, dateStr);
-    db.ref(path).set(payload).then(() => {
+    db.ref(path).update(updates).then(() => {
       setSyncing(false);
       setSaveStatus("saved");
       setLastSavedAt(new Date());
@@ -842,6 +950,8 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
       toast("⚠️ Pilih atau isi alasan izin");
       return;
     }
+    pushHistory();
+    markDirty(name);
     setAttendance(prev => ({ ...prev, [name]: "IZIN" }));
     setIzinReasons(prev => ({ ...prev, [name]: r }));
     setIzinPopup(null);
@@ -899,6 +1009,8 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
       openIzinPopup(name);
       return;
     }
+    pushHistory();
+    markDirty(name);
     const safe = normalizeStatus(st);
     setAttendance(prev => ({ ...prev, [name]: safe }));
     setIzinReasons(prev => ({ ...prev, [name]: "" }));
@@ -909,6 +1021,8 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
     const { name, nextStatus } = statusConfirm;
     setStatusConfirm(null);
     if (nextStatus === null) {
+      pushHistory();
+      markDirty(name);
       setAttendance(prev => ({ ...prev, [name]: null }));
       setIzinReasons(prev => ({ ...prev, [name]: "" }));
       toast("✅ Status dihapus");
@@ -917,13 +1031,26 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
     applyStatusChange(name, nextStatus);
   };
 
-  const markAllAlfa = () => {
+  const openAlfaConfirm = () => {
     if (!isAdmin) return;
     const belumDiisi = list.filter(s => !attendance[s]);
     if (belumDiisi.length === 0) {
       toast("✅ Semua sudah ada keterangan — tidak ada yang diubah");
       return;
     }
+    setAlfaConfirm(true);
+  };
+
+  const markAllAlfa = () => {
+    if (!isAdmin) return;
+    const belumDiisi = list.filter(s => !attendance[s]);
+    if (belumDiisi.length === 0) {
+      setAlfaConfirm(false);
+      toast("✅ Semua sudah ada keterangan — tidak ada yang diubah");
+      return;
+    }
+    pushHistory();
+    markDirtyMany(belumDiisi);
     setAttendance(prev => {
       const n = { ...prev };
       list.forEach(s => { if (!n[s]) n[s] = "ALFA"; });
@@ -934,6 +1061,7 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
       list.forEach(s => { if (!attendance[s]) n[s] = ""; });
       return n;
     });
+    setAlfaConfirm(false);
     toast(`✅ ${belumDiisi.length} yang belum ada keterangan ditandai ALFA`);
   };
 
@@ -944,9 +1072,22 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
 
   const doReset = async () => {
     if (!isAdmin) return;
+    pushHistory();
+    markDirtyMany(list);
     try {
       setSyncing(true);
-      await db.ref(attendancePath(batch, dateStr)).set(null);
+      // Bangun update kosong (hapus semua key batch+tanggal ini) via update per-key.
+      // Pendekatan paling aman: ambil snapshot dulu, lalu null-kan semua key yang ada,
+      // sekaligus null-kan semua siswa di list (untuk jaga-jaga kalau ada key yang belum ke-load).
+      const path = attendancePath(batch, dateStr);
+      const snap = await db.ref(path).once("value");
+      const existing = snap.val() || {};
+      const updates = {};
+      Object.keys(existing).forEach(k => { updates[k] = null; });
+      list.forEach(name => { updates[toFbKey(name)] = null; });
+      if (Object.keys(updates).length) {
+        await db.ref(path).update(updates);
+      }
       skipNextSave.current = true;
       setAttendance(prev => {
         const n = { ...prev };
@@ -958,7 +1099,10 @@ el.style.boxShadow = "0 0 0 8px rgba(0,0,0,.18)";
         list.forEach(s => n[s] = "");
         return n;
       });
-      setTimeout(() => { skipNextSave.current = false; }, 200);
+      setTimeout(() => {
+        skipNextSave.current = false;
+        dirtyRef.current.clear();
+      }, 200);
       setResetConfirm(false);
       setSyncing(false);
       setSaveStatus("saved");
@@ -1312,23 +1456,25 @@ const saveEditStudent = async () => {
       const path = attendancePath(batch, ds);
       const snap = await db.ref(path).once("value");
       const val = snap.val() || {};
-      const next = { ...val };
+      // Bangun update per-key supaya tidak menimpa siswa lain.
+      const updates = {};
       const k = toFbKey(editStudent);
       if (!r.status) {
-        delete next[k];
-        delete next[editStudent];
+        updates[k] = null;
+        if (editStudent !== k && val[editStudent] !== undefined) updates[editStudent] = null;
       } else {
-        next[k] = {
+        updates[k] = {
           status: r.status,
           reason: r.status === "IZIN" ? (r.reason || "").trim() : ""
         };
-        delete next[editStudent];
+        if (editStudent !== k && val[editStudent] !== undefined) updates[editStudent] = null;
       }
-      await db.ref(path).set(next);
+      await db.ref(path).update(updates);
     }
 
     const cur = byDate[dateStr];
     if (cur !== undefined) {
+      markDirty(editStudent);
       setAttendance(prev => ({ ...prev, [editStudent]: cur.status || null }));
       setIzinReasons(prev => ({ ...prev, [editStudent]: cur.status === "IZIN" ? (cur.reason || "") : "" }));
     }
@@ -1943,7 +2089,7 @@ h("div", { style:{ maxWidth:960, margin:"0 auto", padding:"24px 16px 0" } }, [
 
       h("div", { style:{ marginTop:20, display:"flex", gap:10, flexWrap:"wrap", alignItems:"center" } }, [
         isAdmin && h("button", {
-          onClick: markAllAlfa,
+          onClick: openAlfaConfirm,
           title: "Tandai ALFA hanya untuk siswa yang belum ada keterangan",
           style: {
             height:44, padding:"0 18px", borderRadius:12, background:"#fff",
@@ -1951,6 +2097,30 @@ h("div", { style:{ maxWidth:960, margin:"0 auto", padding:"24px 16px 0" } }, [
             color:"#b91c1c", boxShadow:"0 1px 2px rgba(0,0,0,.05)", cursor:"pointer"
           }
         }, "⚠ Alfa otomatis"),
+        isAdmin && h("button", {
+          onClick: doUndo,
+          disabled: !undoStack.length,
+          title: "Undo (Ctrl+Z)",
+          style: {
+            height:44, padding:"0 18px", borderRadius:12, background:"#fff",
+            border:"1px solid rgba(0,0,0,.1)", fontWeight:700, fontSize:13,
+            color:"rgba(0,0,0,.7)", boxShadow:"0 1px 2px rgba(0,0,0,.05)",
+            cursor: undoStack.length ? "pointer" : "not-allowed",
+            opacity: undoStack.length ? 1 : 0.4
+          }
+        }, "↶ Undo"),
+        isAdmin && h("button", {
+          onClick: doRedo,
+          disabled: !redoStack.length,
+          title: "Redo (Ctrl+Shift+Z)",
+          style: {
+            height:44, padding:"0 18px", borderRadius:12, background:"#fff",
+            border:"1px solid rgba(0,0,0,.1)", fontWeight:700, fontSize:13,
+            color:"rgba(0,0,0,.7)", boxShadow:"0 1px 2px rgba(0,0,0,.05)",
+            cursor: redoStack.length ? "pointer" : "not-allowed",
+            opacity: redoStack.length ? 1 : 0.4
+          }
+        }, "↷ Redo"),
         isAdmin && h("button", {
           onClick: openSalinPro,
           title: "Salin rekap SEMUA program (Jepang 1 - Turki) sekaligus",
@@ -2833,6 +3003,56 @@ h("button", {
               }
             }, "📥 Ekspor Semua Program")
           ])
+        ])
+      ])
+    ]),
+
+    alfaConfirm && h("div", {
+      style: {
+        position:"fixed", inset:0, zIndex:150,
+        display:"flex", alignItems:"center", justifyContent:"center", padding:16
+      }
+    }, [
+      h("div", {
+        onClick: () => setAlfaConfirm(false),
+        style: { position:"absolute", inset:0, background:"rgba(0,0,0,.5)", backdropFilter:"blur(6px)" }
+      }),
+      h("div", {
+        style: {
+          position:"relative", width:"100%", maxWidth:380, borderRadius:24,
+          background:"#fff", padding:24, boxShadow:"0 20px 60px -12px rgba(0,0,0,.4)",
+          animation:"scaleIn .25s ease"
+        }
+      }, [
+        h("div", { style:{ display:"flex", gap:12, alignItems:"flex-start" } }, [
+          h("div", {
+            style: {
+              width:40, height:40, borderRadius:999, flexShrink:0,
+              background:"#fee2e2", color:"#dc2626",
+              display:"flex", alignItems:"center", justifyContent:"center", fontSize:18
+            }
+          }, "⚠"),
+          h("div", { style:{ flex:1 } }, [
+            h("div", { style:{ fontSize:15, fontWeight:700, color:"#18181b" } }, "Tandai ALFA otomatis?"),
+            h("div", { style:{ marginTop:4, fontSize:13, color:"#52525b", lineHeight:1.4 } },
+              "Semua siswa yang belum ada keterangan akan ditandai ALFA. Yang sudah diisi tidak diubah.")
+          ])
+        ]),
+        h("div", { style:{ marginTop:24, display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 } }, [
+          h("button", {
+            onClick: () => setAlfaConfirm(false),
+            style: {
+              borderRadius:999, background:"#f4f4f5", border:"1px solid #e4e4e7",
+              padding:"12px 16px", fontSize:13, fontWeight:700, color:"#3f3f46", cursor:"pointer"
+            }
+          }, "Batal"),
+          h("button", {
+            onClick: markAllAlfa,
+            style: {
+              borderRadius:999, background:"#ef4444", border:"none", color:"#fff",
+              padding:"12px 16px", fontSize:13, fontWeight:700, cursor:"pointer"
+            }
+          }, "Ya, Tandai ALFA")
         ])
       ])
     ]),
